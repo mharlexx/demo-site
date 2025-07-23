@@ -17,6 +17,7 @@
       color: white;
       padding: 4rem 2rem;
       text-align: center;
+      position: relative;
     }
 
     header h1 {
@@ -43,36 +44,74 @@
       background: #2563eb;
     }
 
+    /* Dropdown styles */
+    .dropdown {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 10;
+    }
+
+    .dropbtn {
+      background-color: #2563eb;
+      color: white;
+      padding: 10px 16px;
+      font-size: 14px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: white;
+      min-width: 160px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .dropdown-content button {
+      color: #333;
+      padding: 10px 16px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      background: none;
+      cursor: pointer;
+    }
+
+    .dropdown-content button:hover {
+      background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
     .section {
       padding: 4rem 2rem;
       max-width: 1000px;
       margin: 0 auto;
     }
 
-    .features {
+    .features, .pricing {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
     }
 
-    .feature {
+    .feature, .plan {
       background: #f1f5f9;
       padding: 2rem;
       border-radius: 8px;
       text-align: center;
     }
 
-    .pricing {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-    }
-
     .plan {
       border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 2rem;
-      text-align: center;
     }
 
     .plan h3 {
@@ -102,6 +141,20 @@
   </style>
 </head>
 <body>
+
+  <!-- Intercom Button Dropdown -->
+  <div class="dropdown">
+    <button class="dropbtn">Intercom</button>
+    <div class="dropdown-content">
+      <button onclick="startIntercomTour()">Product Tour</button>
+      <button>Test 1</button>
+      <button>Test 2</button>
+      <button>Test 3</button>
+      <button>Test 4</button>
+      <button>Test 5</button>
+      <button>Test 6</button>
+    </div>
+  </div>
 
   <header>
     <h1>DemoSaaS</h1>
@@ -167,7 +220,7 @@
     &copy; 2025 DemoSaaS. All rights reserved.
   </footer>
 
-  <!-- Intercom Fin AI Widget -->
+  <!-- Intercom Settings -->
   <script>
     window.intercomSettings = {
       api_base: "https://api-iam.intercom.io",
@@ -175,6 +228,7 @@
     };
   </script>
 
+  <!-- Intercom Loader -->
   <script>
     (function(){
       var w=window;var ic=w.Intercom;
@@ -198,6 +252,17 @@
         else { w.addEventListener('load',l,false); }
       }
     })();
+  </script>
+
+  <!-- Custom JS to Trigger Intercom Tour -->
+  <script>
+    function startIntercomTour() {
+      if (window.Intercom) {
+        Intercom('startTour', '623550');
+      } else {
+        console.error('Intercom is not loaded yet.');
+      }
+    }
   </script>
 
 </body>
