@@ -44,11 +44,31 @@
       background: #2563eb;
     }
 
-    .dropdown {
+    .top-buttons {
       position: absolute;
       top: 1rem;
       right: 1rem;
-      z-index: 10;
+      display: flex;
+      gap: 0.5rem;
+      z-index: 20;
+    }
+
+    .contact-btn {
+      background-color: #1e3a8a;
+      color: white;
+      padding: 10px 16px;
+      font-size: 14px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .contact-btn:hover {
+      background-color: #3b82f6;
+    }
+
+    .dropdown {
+      position: relative;
     }
 
     .dropbtn {
@@ -70,6 +90,7 @@
       box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
       border-radius: 4px;
       overflow: hidden;
+      z-index: 100;
     }
 
     .dropdown-content button {
@@ -137,21 +158,85 @@
       padding: 2rem;
       font-size: 0.9rem;
     }
+
+    /* Contact Form Modal */
+    .contact-form {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
+    }
+
+    .contact-form-content {
+      background-color: white;
+      margin: 10% auto;
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+    }
+
+    .contact-form-content h2 {
+      margin-top: 0;
+      color: #1e3a8a;
+      text-align: center;
+    }
+
+    .contact-form-content input,
+    .contact-form-content textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .contact-form-content button[type="submit"] {
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      cursor: pointer;
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    .contact-form-content button[type="submit"]:hover {
+      background-color: #1e40af;
+    }
+
+    .close-btn {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Intercom Button Dropdown -->
-  <div class="dropdown">
-    <button class="dropbtn">Intercom</button>
-    <div class="dropdown-content">
-      <button onclick="startIntercomTour()">Product Tour</button>
-      <button>Test 1</button>
-      <button>Test 2</button>
-      <button>Test 3</button>
-      <button>Test 4</button>
-      <button>Test 5</button>
-      <button>Test 6</button>
+  <!-- Top Right Buttons -->
+  <div class="top-buttons">
+    <button class="contact-btn" onclick="toggleContactForm()">Contact</button>
+    <div class="dropdown">
+      <button class="dropbtn">Intercom</button>
+      <div class="dropdown-content">
+        <button onclick="startIntercomTour()">Product Tour</button>
+        <button>Test 1</button>
+        <button>Test 2</button>
+        <button>Test 3</button>
+        <button>Test 4</button>
+        <button>Test 5</button>
+        <button>Test 6</button>
+      </div>
     </div>
   </div>
 
@@ -219,6 +304,20 @@
     &copy; 2025 Marvel. All rights reserved.
   </footer>
 
+  <!-- Contact Form Modal -->
+  <div id="contactForm" class="contact-form">
+    <div class="contact-form-content">
+      <span class="close-btn" onclick="toggleContactForm()">&times;</span>
+      <h2>Contact Us</h2>
+      <form id="contact" onsubmit="return false;">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+
   <!-- Intercom Settings -->
   <script>
     window.intercomSettings = {
@@ -253,7 +352,7 @@
     })();
   </script>
 
-  <!-- Custom JS to Trigger Intercom Tour -->
+  <!-- JS to Handle Contact Modal & Intercom -->
   <script>
     function startIntercomTour() {
       if (window.Intercom) {
@@ -261,6 +360,11 @@
       } else {
         console.error('Intercom is not loaded yet.');
       }
+    }
+
+    function toggleContactForm() {
+      const form = document.getElementById('contactForm');
+      form.style.display = form.style.display === 'block' ? 'none' : 'block';
     }
   </script>
 
