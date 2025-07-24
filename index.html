@@ -159,7 +159,6 @@
       font-size: 0.9rem;
     }
 
-    /* Contact Form Modal */
     .contact-form {
       display: none;
       position: fixed;
@@ -309,7 +308,7 @@
     <div class="contact-form-content">
       <span class="close-btn" onclick="toggleContactForm()">&times;</span>
       <h2>Contact Us</h2>
-      <form id="contact" onsubmit="return false;">
+      <form action="https://formspree.io/f/xrblpdod" method="POST">
         <input type="text" name="name" placeholder="Your Name" required />
         <input type="email" name="email" placeholder="Your Email" required />
         <textarea name="message" placeholder="Your Message" required></textarea>
@@ -352,7 +351,6 @@
     })();
   </script>
 
-  <!-- JS to Handle Contact Modal & Intercom -->
   <script>
     function startIntercomTour() {
       if (window.Intercom) {
